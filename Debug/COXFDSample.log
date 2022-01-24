@@ -1,0 +1,11 @@
+﻿빌드 시작: 2022-01-07 오전 10:46:41
+     1>2 노드의 "D:\B49\Customer\COX\COXFDSample\COXFDSample\COXFDSample.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\01.Sdk\01.COXSDK\include /I..\01.Sdk\02.FaceMeSDK\Headers /I..\01.Sdk\03.opencv2\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\COXFDSample.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>d:\b49\customer\cox\coxfdsample\coxfdsample\userinclude.h(20): fatal error C1083: 포함 파일을 열 수 없습니다. 'C:\\Program Files\\Bonjour SDK\Include\dns_sd.h': No such file or directory
+     1>"D:\B49\Customer\COX\COXFDSample\COXFDSample\COXFDSample.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:02.00

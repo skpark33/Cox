@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="03.리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="02.소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="01.헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{581075dc-fa78-498b-9fd0-fef61fea1a1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{bac8a799-4ff8-4a9b-87f1-bcecdda8ff8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{590789b0-d90e-40bb-9186-f8fb0787aa1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ETC">
+      <UniqueIdentifier>{268ab5c5-9711-4471-a077-91db8c5782bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="skpark">
+      <UniqueIdentifier>{9544107c-67a8-4d41-902a-f40bd4e5fb18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Guardian">
+      <UniqueIdentifier>{8e92091d-aca0-46f2-9217-ec2a42b027ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ci">
+      <UniqueIdentifier>{6e54365b-007f-41f1-b702-d536b99a8fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ci\libAes256">
+      <UniqueIdentifier>{b9bb3e29-26a3-4541-8125-c93144dd6261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ci\libBase">
+      <UniqueIdentifier>{798ba82a-8b7e-4b84-bab2-64fab8afe644}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>01.헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>01.헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>01.헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="COXFDSample.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="COXFDSampleDlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDef.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UserStruct.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInclude.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UserFunc.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UserMessage.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="VCamView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TCamView.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MyHelperMan.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BonjourMan.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CBBTempCorrection.h">
+      <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DTextCustomRender.h">
+      <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneHomography.h">
+      <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="ThermalCamera.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="VisableCamera.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="INIManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SMatrix.h">
+      <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="Lock.h">
+      <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\AlarmInfo.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\common.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\Crc32Static.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\GeneralDef.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\HoverButton.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\MemDC.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\PictureEx.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\Statistics.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\TraceLog.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="skpark\WindowCapture.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="Guardian\CoxGuardian.h">
+      <Filter>Guardian</Filter>
+    </ClInclude>
+    <ClInclude Include="Guardian\CoxConfig.h">
+      <Filter>Guardian</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>skpark</Filter>
+    </ClInclude>
+    <ClInclude Include="Guardian\HotKeyDlg.h">
+      <Filter>Guardian</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciAES256.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciAES256_Base.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciAES256_PRNG.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciByte_Block.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciElCryptoAes256.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciPadding_Type.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\ciS_Box.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libAes256\cistdafx.h">
+      <Filter>ci\libAes256</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciArgParser.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciBaseType.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciErrObject.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciListType.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciMacro.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciPointer.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciStringTokenizer.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciStringUtil.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciTime.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciUtil.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="ci\libBase\ciWin32DLL.h">
+      <Filter>ci\libBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Guardian\FacePainterStatic.h">
+      <Filter>Guardian</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>02.소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="COXFDSampleDlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="COXFDSample.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TCamView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="VCamView.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MyHelperMan.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BonjourMan.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBBTempCorrection.cpp">
+      <Filter>ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DTextCustomRender.cpp">
+      <Filter>ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneHomography.cpp">
+      <Filter>ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="ThermalCamera.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="VisableCamera.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="INIManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SMatrix.cpp">
+      <Filter>ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\common.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\Crc32Static.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\HoverButton.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\PictureEx.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\Statistics.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="skpark\WindowCapture.cpp">
+      <Filter>skpark</Filter>
+    </ClCompile>
+    <ClCompile Include="Guardian\CoxGuaradian.cpp">
+      <Filter>Guardian</Filter>
+    </ClCompile>
+    <ClCompile Include="Guardian\CoxConfig.cpp">
+      <Filter>Guardian</Filter>
+    </ClCompile>
+    <ClCompile Include="Guardian\HotKeyDlg.cpp">
+      <Filter>Guardian</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libAes256\ciAES256.cpp">
+      <Filter>ci\libAes256</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libAes256\ciAES256_Base.cpp">
+      <Filter>ci\libAes256</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libAes256\ciAES256_PRNG.cpp">
+      <Filter>ci\libAes256</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libAes256\ciElCryptoAes256.cpp">
+      <Filter>ci\libAes256</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libAes256\ciS_Box.cpp">
+      <Filter>ci\libAes256</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciArgParser.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciErrObject.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciStringTokenizer.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciStringUtil.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciTime.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciUtil.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="ci\libBase\ciWin32DLL.cpp">
+      <Filter>ci\libBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Guardian\FacePainterStatic.cpp">
+      <Filter>Guardian</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="COXFDSample.rc">
+      <Filter>03.리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\COXFDSample.rc2">
+      <Filter>03.리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\COXFDSample.ico">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\COX LOGO white.png">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\banner.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_license&amp;server.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Brightness-.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Brightness+.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Camera_web_page.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Close.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Close_All_Window.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Configuration.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Contrast-.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Contrast+.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_ESC.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Full_Camera_window.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Narrow_Screen.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Normal_-Display.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Terminate_All_Program.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_ESC_closevideo.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Shrink_window.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Thermal_Display.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\btn_Wide_Screen.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bg.bmp">
+      <Filter>03.리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
