@@ -247,12 +247,12 @@ bool ciAes256Util::EncryptFile(LPCTSTR inFilePath, LPCTSTR outFilePath, bool rem
 	HCRYPTPROV    hProv;
 	HCRYPTHASH    hHash;
 	HCRYPTKEY    hKey;
-	CString        csPass = "JYT20140315197402171994082501234";
+	const char*        csPass = "JYT20140315197402171994082501234";
 
 	// CSP(Crystographic Service Provider) 핸들 얻기
-	if (!CryptAcquireContext(&hProv, NULL, MS_ENHANCED_PROV, PROV_RSA_FULL, 0))
+	if (!CryptAcquireContextA(&hProv, NULL, MS_ENHANCED_PROV_A, PROV_RSA_FULL, 0))
 	{
-		if (!CryptAcquireContext(&hProv, NULL, MS_ENHANCED_PROV, PROV_RSA_FULL, CRYPT_NEWKEYSET))
+		if (!CryptAcquireContextA(&hProv, NULL, MS_ENHANCED_PROV_A, PROV_RSA_FULL, CRYPT_NEWKEYSET))
 		{
 			TraceLog((_T("Fail to Encrypt")));
 			return false;
@@ -262,7 +262,7 @@ bool ciAes256Util::EncryptFile(LPCTSTR inFilePath, LPCTSTR outFilePath, bool rem
 	// 해쉬 만들기
 	CryptCreateHash(hProv, CALG_SHA, 0, 0, &hHash);
 	// 해쉬 값 계산
-	CryptHashData(hHash, (BYTE*)(LPCTSTR)csPass, csPass.GetLength(), 0);
+	CryptHashData(hHash, (BYTE*)(char *)csPass, strlen(csPass), 0);
 	// 키 만들기\tab
 	CryptDeriveKey(hProv, CALG_RC4, hHash, 0x0080 * 0x10000, &hKey);
 	// 암호화\tab

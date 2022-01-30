@@ -1405,84 +1405,6 @@ void ShowFirmwareView(bool show)
 	}
 }
 
-void OpenHikvisionCameraPage()
-{
-	TraceLog((_T("skpark VK_F3...")));
-	CString iniPath = UBC_CONFIG_PATH;
-	iniPath += UBCBRW_INI;
-	TCHAR buf[2048];
-	memset(buf, 0x00, 2048);
-	GetPrivateProfileString(_T("GUARDIAN"), _T("IP"), _T("1"), buf, 2048, iniPath);
-	CString ipStr = buf;
-	if (ipStr == "1")
-	{
-		GetPrivateProfileString(_T("GUARDIAN"), _T("QUERYALL"), _T("1"), buf, 2048, iniPath);
-		ipStr = buf;
-
-		int pos = 0;
-		CString nvPair = ipStr.Tokenize(PROPERTY_DELI1, pos);
-		while (nvPair != "")
-		{
-			TraceLog((_T("nvPair=%s"), nvPair));
-			int pos2 = 0;
-			CString name = nvPair.Tokenize(PROPERTY_DELI2, pos2);
-			TraceLog((_T("name=%s"), name));
-			CString val = nvPair.Tokenize(PROPERTY_DELI2, pos2);
-			TraceLog((_T("val=%s"), val));
-
-			if (name == _T("IP"))
-			{
-				ipStr = val;
-				break;
-			}
-			nvPair = ipStr.Tokenize(PROPERTY_DELI1, pos);
-		}
-	}
-
-	CString url = _T("http://");
-	url += ipStr;
-	OpenIExplorer(url);
-}
-
-bool ToggleWideNarrow(CDialogEx* dlg, bool isKistType)
-{
-	TraceLog((_T("skpark VK_F4...")));
-
-	CString iniPath = UBC_CONFIG_PATH;
-	iniPath += UBCBRW_INI;
-	TCHAR buf[10];
-	memset(buf, 0x00, 10);
-	GetPrivateProfileString(ENTRY_NAME, _T("IS_WIDE"), _T("0"), buf, 10, iniPath);
-	bool isWide = !(bool(_wtoi(buf)));
-	wsprintf(buf, _T("%d"), isWide);
-	WritePrivateProfileString(ENTRY_NAME, _T("IS_WIDE"), buf, iniPath);
-
-	CString brwname = _T("UTV_brwClient2");
-
-	WritePrivateProfileString(brwname, _T("UsePosition"), _T("1"), iniPath);
-	if (isWide)
-	{
-		WritePrivateProfileString(brwname, _T("PosX"), _T("0"), iniPath);
-		//WritePrivateProfileString(brwname, "PosY", (m_config->m_is_KIST_type ? "995" : "1220"), iniPath);
-		//if (!m_config->m_is_KIST_type) WritePrivateProfileStringA(brwname, "PosY", "1220", iniPath);
-		if (!isKistType) WritePrivateProfileString(brwname, _T("PosY"), _T("1220"), iniPath);
-		WritePrivateProfileString(brwname, _T("Width"), _T("1080"), iniPath);
-		WritePrivateProfileString(brwname, _T("Height"), _T("700"), iniPath);
-	}
-	else
-	{
-		WritePrivateProfileString(brwname, _T("PosX"), _T("83"), iniPath);
-		WritePrivateProfileString(brwname, _T("PosY"), _T("1106"), iniPath);
-		WritePrivateProfileString(brwname, _T("Width"), _T("915"), iniPath);
-		WritePrivateProfileString(brwname, _T("Height"), _T("740"), iniPath);
-	}
-
-	::SendMessage(dlg->GetSafeHwnd(), WM_CLOSE, NULL, NULL);
-	KillBrowserOnly();
-
-	return isWide;
-}
-
 
 bool getVersion(CString& version)
 {
@@ -1815,7 +1737,7 @@ CString  makeTimeKey(TCHAR postfix)
 	GetLocalTime(&t);
 	TCHAR chTime[128];
 	memset(chTime, 0x00, 128);
-	wsprintf(chTime, _T("%4.4d%2.2d%2.2d%2.2d%2.2d%2.2d_%6.6d_%c"),
+	wsprintf(chTime, _T("[%4.4d%2.2d%2.2d%2.2d%2.2d%2.2d_%6.6d_%c]"),
 		t.wYear, t.wMonth, t.wDay, t.wHour, t.wMinute, t.wSecond, t.wMilliseconds, postfix);
 
 	return chTime;
@@ -1824,14 +1746,17 @@ CString  makeTimeKey(TCHAR postfix)
 bool SaveFile(LPCTSTR fullpath, void* targetText, int targetLen, int iDeviceIndex)
 {
 	TraceLog((_T("SaveFile(%s)"), fullpath));
+	char* pBuf = ConvertWCtoC((const wchar_t* )targetText);
+
 	FILE* fp = _wfopen(fullpath, _T("wb"));
 	if (fp == NULL)
 	{
 		return false;
 	}
-	fwrite(targetText, 1, sizeof(TCHAR) * wcslen((const TCHAR*)targetText), fp);
+	fwrite(pBuf, 1, sizeof(char)* strlen(pBuf), fp);
 	fflush(fp);
 	fclose(fp);
+	delete[] pBuf;
 	TraceLog((_T("SaveFile end")));
 	return true;
 

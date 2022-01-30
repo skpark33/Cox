@@ -184,7 +184,6 @@ BOOL CHotKeyDlg::OnInitDialog()
 }
 void CHotKeyDlg::OnBnClickedBtF3()
 {
-	OpenHikvisionCameraPage();
 }
 void CHotKeyDlg::OnBnClickedBtF4Narrow()
 {
@@ -207,7 +206,7 @@ void CHotKeyDlg::OnBnClickedBtF5Normal()
 }
 void CHotKeyDlg::OnBnClickedBtF7()
 {
-	//m_parent->OpenUploader();
+	m_parent->OpenConfigurator();
 }
 void CHotKeyDlg::OnBnClickedBtF8()
 {

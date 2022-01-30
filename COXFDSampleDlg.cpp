@@ -90,8 +90,8 @@ void CCOXFDSampleDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TCAM_SCREEN, m_wndTCam);
 	DDX_Control(pDX, IDC_EDIT1, m_edVisableSkipFrame);
 	DDX_Control(pDX, IDC_BUTTON5, m_BtnSkipFrame);
-	DDX_Control(pDX, IDC_STATIC_STAT, m_statArea);
-	DDX_Control(pDX, IDC_STATIC_FACE_AREA, m_stFaceArea);
+	DDX_Control(pDX, IDC_STATIC_STAT, m_statArea);  //skpark in your area 평균갑 보여주기
+	DDX_Control(pDX, IDC_STATIC_FACE_AREA, m_stFaceArea); //  skpark in your area 사진 보여주기
 }
 
 
@@ -131,7 +131,7 @@ void CCOXFDSampleDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	if (m_cox_guardian)
 	{
-		m_cox_guardian->OnTimer(nIDEvent);
+		m_cox_guardian->OnTimer(nIDEvent);  //skpark in your arer
 		//m_guardian->OnTimer(nIDEvent);
 	}
 	CDialog::OnTimer(nIDEvent);
@@ -150,7 +150,7 @@ void CCOXFDSampleDlg::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	if (m_cox_guardian)
 	{
-		m_cox_guardian->OnLButtonUp(nFlags, point);
+		m_cox_guardian->OnLButtonUp(nFlags, point);  //skpark in your area
 	}
 	CDialog::OnLButtonUp(nFlags, point);
 	return;
@@ -162,7 +162,7 @@ HBRUSH CCOXFDSampleDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	if (m_cox_guardian)
 	{
-		return m_cox_guardian->OnCtlColor(IDC_STATIC_STAT, pDC, pWnd, nCtlColor, hbr);
+		return m_cox_guardian->OnCtlColor(IDC_STATIC_STAT, pDC, pWnd, nCtlColor, hbr);  // skpark in your area
 	}
 	return hbr;
 }
@@ -267,7 +267,7 @@ void CCOXFDSampleDlg::OnPaint()
 	}
 	else
 	{
-		if (m_cox_guardian)  m_cox_guardian->OnPaint();  //skpark add
+		if (m_cox_guardian)  m_cox_guardian->OnPaint();  //skpark in your area
 		CDialogEx::OnPaint();
 	}
 }
@@ -284,7 +284,7 @@ void CCOXFDSampleDlg::OnDestroy()
 {
 	if (m_cox_guardian)  //skpark add
 	{
-		m_cox_guardian->OnDestroy();
+		m_cox_guardian->OnDestroy();  //skpark in your area
 	}
 	CDialogEx::OnDestroy();
 
@@ -297,16 +297,16 @@ void CCOXFDSampleDlg::OnSize(UINT nType, int cx, int cy)
 	CDialogEx::OnSize(nType, cx, cy);
 	if (m_cox_guardian && m_cox_guardian->m_bFullScreen)
 	{
-		m_cox_guardian->MaxWindow();
+		m_cox_guardian->MaxWindow();  //skpark in your area
 	}
 }
 
 
 BOOL CCOXFDSampleDlg::PreTranslateMessage(MSG* pMsg)
 {
-	if (m_cox_guardian) //skpark add
+	if (m_cox_guardian) 
 	{
-		m_cox_guardian->PreTranslateMessage(pMsg);  //skpark add
+		m_cox_guardian->PreTranslateMessage(pMsg);  //skpark in your area
 	}
 
 	if( pMsg->message == WM_KEYDOWN ) {
@@ -588,8 +588,8 @@ void CCOXFDSampleDlg::FindVCamList()
 		m_cbVCamList.AddString(pCam->m_strDeviceName);
 	}
 	
-	m_cbVCamList.SetCurSel(0);   //skpark add
-	OnCbnSelchangeCombo1();   //skpark add
+	m_cbVCamList.SetCurSel(0);   //skpark in your area  3번 USB
+	OnCbnSelchangeCombo1();   //skpark in your area
 
 	m_bVCamRefresh = FALSE;
 }
@@ -728,7 +728,7 @@ void CCOXFDSampleDlg::OnCbnSelchangeCombo1()
 		m_cbVCamSupportResolutionList.AddString(strRes);
 		TraceLog((_T("strRes:%s"), strRes));
 	}
-	m_cbVCamSupportResolutionList.SetCurSel(COX_RESOLTION);  //skpark add
+	m_cbVCamSupportResolutionList.SetCurSel(COX_RESOLTION);  //skpark in our area 640x480
 }
 
 

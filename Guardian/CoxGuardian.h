@@ -148,6 +148,7 @@ public:
 	bool CheckFever(FACE_INFO* faceInfo);
 
 	void OpenAuthorizer();
+	void OpenConfigurator();
 
 	BOOL IsSameMan(FaceMeSDK::IFaceMeRecognizer*	 m_pFMRecognizerr, FACE_FEATURE_INFO* newFaceFeature);
 

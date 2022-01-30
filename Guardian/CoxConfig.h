@@ -50,12 +50,13 @@ public:
 
 	BOOL Read(LPCTSTR a_iniPath);
 	BOOL Write();
-	BOOL WriteIniDeviceInfo(int index);
+	//BOOL WriteIniDeviceInfo(int index);
 
 	void Copy(CoxConfig* that);
 
 protected:
 	void _Init();
+	BOOL _Read(LPCTSTR a_iniPath);
 
 protected:
 	CString m_msgBuf;

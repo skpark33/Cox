@@ -754,15 +754,15 @@ void CVisableCamera::RunThreadProc()
 				if (m_cox_guardian)
 				{
 					//skpark in your area start
-					static int feverCount = 0;   // 튀는 값을 막기 위해, 30번이상 연속으로 fever 로 체크된 경우에 한해서 Fever 로 간주한다.
+					static int feverCount = 0;   
 					for (UINT i = 0; i < m_nFaceCount; ++i) {
 						FACE_INFO* pFace = &pDst->face_detect[i];
 						if (m_cox_guardian->isCase(pFace))
 						{
 							feverCount++;
-							if (feverCount > m_cox_guardian->m_config->m_valid_event_limit)
+							if (feverCount > m_cox_guardian->m_config->m_valid_event_limit) // 튀는 값을 막기 위해, 6번이상 연속으로 fever 로 체크된 경우에 한해서 Fever 로 간주한다.
 							{
-								if (m_cox_guardian->IsSameMan(m_pFMRecognizer, &(pFace->facefeature)) == false)
+								if (m_cox_guardian->IsSameMan(m_pFMRecognizer, &(pFace->facefeature)) == false) //동일인물 체크
 								{
 									m_cox_guardian->CaseDetected(pFace,
 										pFace->visable_facebox,

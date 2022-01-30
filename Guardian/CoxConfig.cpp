@@ -11,6 +11,7 @@ Modification History:
 #include "stdafx.h"
 #include "common.h"
 #include "CoxConfig.h"
+#include <io.h>                // skpark
 
 #ifdef _COP_UTV_
 #define TraceLog(x)
@@ -74,7 +75,35 @@ CoxConfig::CoxConfig(LPCTSTR iniPath)
 BOOL CoxConfig::Read(LPCTSTR a_iniPath)
 {
 	TraceLog((_T("CoxConfig::Read()")));
+	return _Read(a_iniPath);
+	/*
+	FILE* pFile = _wfopen(a_iniPath, _T("rb"));
+	if (!pFile)
+	{
+		TraceLog((_T("(%s) file read error "), a_iniPath));
+		return false;
+	}
 
+	DWORD dwFileLen = _filelength(_fileno(pFile));
+	BYTE* bBuff = new BYTE[dwFileLen];
+
+	// 파일 읽어서 버퍼에 저장
+	fread(bBuff, 1, dwFileLen, pFile);
+	fclose(pFile);
+
+	// 파일은 Ansi 로 저장되므로, WCHAR 로 다시 전환함.
+	wchar_t*  unicodeStr = ConvertCtoWC((const char*)bBuff);
+	bool retval = this->FromString(unicodeStr, true);
+
+	delete[] bBuff;
+	delete[] unicodeStr;
+
+	return retval;
+	*/
+}
+
+BOOL CoxConfig::_Read(LPCTSTR a_iniPath)
+{
 	TCHAR buf[4096];
 
 	memset((void*)buf, 0x00, sizeof(buf));
@@ -184,7 +213,7 @@ BOOL CoxConfig::Read(LPCTSTR a_iniPath)
 	memset(buf, 0x00, sizeof(buf));
 	GetPrivateProfileString(ENTRY_NAME, _T("VALID_EVENT_LIMIT"), _T("10"), buf, 4096, a_iniPath);
 	m_valid_event_limit = _wtoi(buf);
-
+	
 	return TRUE;
 }
 
@@ -210,7 +239,7 @@ BOOL CoxConfig::FromString(LPCTSTR fromStr, bool createFile)
 		clsFile.Write(fromStr, wcslen(fromStr));
 		clsFile.Close();
 	}
-	Read(a_iniPath);
+	_Read(a_iniPath);
 	return TRUE;
 }
 
@@ -219,8 +248,17 @@ BOOL CoxConfig::FromString(LPCTSTR fromStr, bool createFile)
 BOOL CoxConfig::Write()
 {
 	TraceLog((_T("Write()")));
-	CString buf;
+	/*
+	// Unicode 를 Ansi로 변경해서 저장한다.
+	CString buf = ToIniString();
+	char* ansiStr = ConvertWCtoC(buf);
 
+	FILE* pFile = _wfopen(m_iniPath, _T("wb"));
+	fwrite(ansiStr, 1, strlen(ansiStr), pFile);
+	fclose(pFile);
+	delete[] ansiStr;
+	*/
+	CString buf;
 	buf.Format(_T("%d"), m_use_pos);
 	WritePrivateProfileString(_T("UTV_brwClient2"), _T("UsePosition"), buf, m_iniPath);
 

@@ -172,7 +172,7 @@ bool CoxGuardian::ToggleCamera()
 	CString iniPath = UBC_CONFIG_PATH;
 	iniPath += UBCBRW_INI;
 	WritePrivateProfileString(ENTRY_NAME, _T("IS_NORMAL"), (m_config->m_is_normal ? _T("1") : _T("0")), iniPath);
-
+	//m_config->Write();
 	return m_config->m_is_normal;
 }
 void CoxGuardian::KillEverything(bool killFirmwareView)
@@ -206,7 +206,7 @@ void CoxGuardian::PreTranslateMessage(MSG* pMsg)
 		}
 		else if (pMsg->wParam == VK_F7)
 		{
-			//OpenUploader();
+			OpenConfigurator();
 		}
 		else if (pMsg->wParam == VK_F5)
 		{
@@ -558,7 +558,7 @@ time_t CoxGuardian::CaseDetected(FACE_INFO* faceInfo, CRect& faceRect, uint32_t 
 	detected->key = timeKey;
 	detected->temperature = faceInfo->face_temp;
 	detected->isFever = CheckFever(faceInfo);//(faceInfo->face_temp >= m_config->m_tipping_point);
-	detected->isNoMask = (faceInfo->mask_state != MASK_WEARING_WELL);
+	detected->isNoMask = (faceInfo->mask_state == MASK_NOT_WEARING);
 	detected->detectTime = now;
 	detected->faceFeature.Copy(faceInfo->facefeature);
 
@@ -1091,3 +1091,22 @@ void CoxGuardian::OpenAuthorizer()
 	}
 	createProcess(authorizer, param, UBC_EXE_PATH);
 }
+
+void CoxGuardian::OpenConfigurator()
+{
+	TraceLog((_T("skpark VK_F7...")));
+	CString uploader = _T("UBCUploader.exe");
+	if (m_localeLang == _T("en"))
+		uploader = _T("UBCUploader_en.exe");
+	else if (m_localeLang == _T("jp"))
+		uploader = _T("UBCUploader_jp.exe");
+
+	unsigned long pid = getPid(uploader);
+	if (pid)
+	{
+		killProcess(pid);
+	}
+	createProcess(uploader, _T(" +ENT +serverOnly"), UBC_EXE_PATH);
+}
+
+

@@ -113,8 +113,6 @@ bool deleteOldFile(LPCTSTR rootDir, int duration, LPCTSTR filter);
 bool deleteOldFile(LPCTSTR rootDir, int day, int hour, int min, LPCTSTR filter);
 
 void KillBrowserOnly();
-void OpenHikvisionCameraPage();
-bool ToggleWideNarrow(CDialogEx* dlg, bool isKistType);
 void ShowFirmwareView(bool show);
 bool getVersion(CString& version);
 
