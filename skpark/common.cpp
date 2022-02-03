@@ -1743,6 +1743,19 @@ CString  makeTimeKey(TCHAR postfix)
 	return chTime;
 }
 
+CString  getTimeStr()
+{
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+	TCHAR chTime[128];
+	memset(chTime, 0x00, 128);
+	wsprintf(chTime, _T("%2.2d:%2.2d:%2.2d"),
+		t.wHour, t.wMinute, t.wSecond);
+
+	return chTime;
+}
+
+
 bool SaveFile(LPCTSTR fullpath, void* targetText, int targetLen, int iDeviceIndex)
 {
 	TraceLog((_T("SaveFile(%s)"), fullpath));

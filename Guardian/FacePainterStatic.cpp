@@ -48,14 +48,21 @@ void CFacePainterStatic::OnPaint()
 	// 깜박임 방지 코드 end
 
 	COLORREF  bg = NORMAL_BG_COLOR;
+
 	switch (m_cox_guardian->m_alarmState)
 	{
 		case NO_MASK_ALARM:  bg = NO_MASK_BG_COLOR; break;
 		case FEVER_ALARM:  bg = FEVER_BG_COLOR; break;
 	}
 	dcMem.FillSolidRect(&client_rect, bg);
-	m_cox_guardian->DrawFaces(&dcMem);
-
+	if (m_cox_guardian->m_alarmState == NO_ALARM)
+	{
+		m_cox_guardian->DrawNotice(dcMem, NOTICE_AREA_HEIGHT / 2 + 5);
+	}
+	else
+	{
+		m_cox_guardian->DrawFaces(&dcMem);
+	}
 	//깜박임 방지 코드 start
 	pDC->BitBlt(rect.left, rect.top, rect.Width(), rect.Height(), &dcMem, 0, 0, SRCCOPY);
 	dcMem.SelectObject(pOldBitmap);

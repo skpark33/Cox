@@ -149,6 +149,7 @@ double getRatio(int resType);
 void CImage2Mat(CImage& Image, cv::Mat& src);
 CImage* Mat2CImage(cv::Mat* mat);
 CString  makeTimeKey(TCHAR postfix);
+CString  getTimeStr();
 bool SaveFile(LPCTSTR fullpath, void* targetText, int targetLen, int iDeviceIndex);
 bool EncryptFile(LPCTSTR inFilePath, LPCTSTR outFilePath, bool removeInFile);
 

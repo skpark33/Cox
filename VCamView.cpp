@@ -11,6 +11,16 @@
 #include "Guardian\CoxGuardian.h"
 #include "TCamView.h"
 void CVCamView::SetCallback(CoxGuardian* g) { m_cox_guardian = g;  }
+CString  CVCamView::GetTimeStr()
+{
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+	TCHAR chTime[128];
+	memset(chTime, 0x00, 128);
+	wsprintf(chTime, _T("%2.2d:%2.2d:%2.2d"),
+		t.wHour, t.wMinute, t.wSecond);
+	return chTime;
+}
 // skpark in your area end
 
 CVCamView::CVCamView()
@@ -322,7 +332,7 @@ void CVCamView::DrawStreaming()
 	// DrawFPS
 	CRect rcFPS(rc);
 	rcFPS.right		= rcFPS.left + 200;
-	rcFPS.bottom	= rcFPS.top + 70;
+	rcFPS.bottom	= rcFPS.top + 70 + 30; //skpark in your area // add 30 for time
 	m_pBrush->SetOpacity(0.5f);
 	m_pBrush->SetColor(CVTCLR(RGB_BLACK));
 	m_pBitmapTarget->FillRectangle(CD2DRectF(rcFPS), m_pBrush);
@@ -330,9 +340,16 @@ void CVCamView::DrawStreaming()
 	m_pBrush->SetOpacity(1.f);
 	m_pBrush->SetColor(CVTCLR(RGB_WHITE));
 	CString strFPS;
-	strFPS.Format(_T("StreamFPS: %d\r\nDetectFPS: %d"),
+	// skpark in your area //modify to show current time !!!!
+	//strFPS.Format(_T("StreamFPS: %d\r\nDetectFPS: %d"),
+	//	theVCMan().GetStreamFPS(),
+	//	theVCMan().GetFaceDetectFPS());
+	strFPS.Format(_T("StreamFPS: %d\r\nDetectFPS: %d\r\n%s"),
 				  theVCMan().GetStreamFPS(),
-				  theVCMan().GetFaceDetectFPS());
+				  theVCMan().GetFaceDetectFPS(),
+				  GetTimeStr());
+	//skpark in your area end
+
 	m_pBitmapTarget->DrawText(strFPS,
 							  strFPS.GetLength(),
 							  m_pTextFmt,

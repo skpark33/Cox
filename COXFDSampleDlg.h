@@ -140,10 +140,9 @@ public:
 	afx_msg BOOL OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg LRESULT OnOldFileDelete(WPARAM, LPARAM);
-
+	void CheckBlackBodyTemp();
 public:
 	bool m_isMinimize;
-	//CGuardian* m_guardian;
 	CoxGuardian* m_cox_guardian;
 	CStatic m_statArea;
 	CFacePainterStatic m_stFaceArea;

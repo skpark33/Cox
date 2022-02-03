@@ -292,8 +292,8 @@ BOOL CStatistics::Write()
 	//buf = m_startTime.Format(_T("%04Y/%02m/%02d %02H:%02M:%02S")));
 	WritePrivateProfileString(ENTRY_NAME_T, _T("STARTDATE"), buf, m_iniPath);
 
-	//buf.Format("%.1f", m_alarmTemperature);
-	//WritePrivateProfileString(ENTRY_NAME_T, "ALARM_TEMPERATURE", buf, m_iniPath);
+	buf.Format(_T("%.1f"), m_alarmTemperature);
+	WritePrivateProfileString(ENTRY_NAME_T, _T("ALARM_TEMPERATURE"), buf, m_iniPath);
 
 	//buf.Format("%.1f", m_alertMinTemperature);
 	//WritePrivateProfileString(ENTRY_NAME_T, "ALERT_MIN_TEMPERATURE", buf, m_iniPath);
@@ -301,8 +301,8 @@ BOOL CStatistics::Write()
 	//buf.Format("%s", m_compensationType);
 	//WritePrivateProfileString(ENTRY_NAME_T, "COMPENSATION_TYPE", buf, m_iniPath);
 
-	//buf.Format("%.1f", m_manualCalibration);
-	//WritePrivateProfileString(ENTRY_NAME_T, "MANUAL_CALIBRATION", buf, m_iniPath);
+	buf.Format(_T("%.1f"), m_manualCalibration);
+	WritePrivateProfileString(ENTRY_NAME_T, _T("MANUAL_CALIBRATION"), buf, m_iniPath);
 
 	//buf.Format("%lu", m_lastApiInvokeTime);
 	//WritePrivateProfileString(ENTRY_NAME_T, "LAST_API_INVOKE_TIME", buf, m_iniPath);

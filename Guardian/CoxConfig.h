@@ -74,7 +74,6 @@ public:
 	bool	m_record_all;
 	bool	m_use_mask_check;	// 마스크착용 사용여부
 
-	double m_tipping_point;   // 온도 경보점
 	int		 m_wait_time;	// 온도를 가져오는 간격 micro second, default 33
 	bool	m_not_use_encrypt;
 

@@ -65,8 +65,15 @@ public:
 
 	float				GetPassOverlapBoxRatio();
 
-
-
+	// skpark in your area in order to change "black body temp"
+	void				ChangeBlackBodyTemp(float newValue)
+	{
+		WriteINI(CString(_T("THERMAL_CAM")),
+			CString(_T("TC_BLACKBODY_TEMP")), 
+			GetMakeString(_T("%.1f"), newValue));
+		m_fBlackbodyTemp = newValue;
+	}
+	
 
 private:
 	CINIManager();

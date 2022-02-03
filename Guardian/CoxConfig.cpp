@@ -51,8 +51,6 @@ void CoxConfig::_Init()
 
 	m_wait_time = 10;
 	m_valid_event_limit = VALID_EVENT_LIMIT;
-	m_tipping_point = TIPPING_POINT;
-
 	m_same_face_confidence = SAME_FACE_CONFIDENCE;
 
 	Read(m_iniPath);
@@ -199,10 +197,6 @@ BOOL CoxConfig::_Read(LPCTSTR a_iniPath)
 	m_is_normal = bool(_wtoi(buf));
 
 	memset(buf, 0x00, sizeof(buf));
-	GetPrivateProfileString(ENTRY_NAME, _T("TIPPING_POINT"), _T("37.5"), buf, 4096, a_iniPath);
-	m_tipping_point = _wtof(buf);
-
-	memset(buf, 0x00, sizeof(buf));
 	GetPrivateProfileString(ENTRY_NAME, _T("SAME_FACE_CONFIDENCE"), _T("0.9"), buf, 4096, a_iniPath);
 	m_same_face_confidence = _wtof(buf);
 
@@ -262,6 +256,7 @@ BOOL CoxConfig::Write()
 	buf.Format(_T("%d"), m_use_pos);
 	WritePrivateProfileString(_T("UTV_brwClient2"), _T("UsePosition"), buf, m_iniPath);
 
+	WritePrivateProfileString(ENTRY_NAME, _T("IP"), _T("0.0.0.0"), m_iniPath);
 	buf = m_title.text;
 	WritePrivateProfileString(ENTRY_NAME, _T("title"), buf, m_iniPath);
 	buf = m_title.font;
@@ -313,9 +308,6 @@ BOOL CoxConfig::Write()
 	buf.Format(_T("%d"), m_is_normal);
 	WritePrivateProfileString(ENTRY_NAME, _T("IS_NORMAL"), buf, m_iniPath);
 
-	buf.Format(_T("%2.1f"), m_tipping_point);
-	WritePrivateProfileString(ENTRY_NAME, _T("TIPPING_POINT"), buf, m_iniPath);
-
 	buf.Format(_T("%2.1f"), m_same_face_confidence);
 	WritePrivateProfileString(ENTRY_NAME, _T("SAME_FACE_CONFIDENCE"), buf, m_iniPath);
 
@@ -336,6 +328,13 @@ LPCTSTR CoxConfig::ToIniString()
 	m_msgBuf = _T("[UTV_brwClient2]");
 	m_msgBuf += _T("\r\n");
 	buf.Format(_T("UsePosition=%d\r\n"), m_use_pos);
+	m_msgBuf += buf;
+
+	m_msgBuf += _T("[");
+	m_msgBuf += ENTRY_NAME;
+	m_msgBuf += _T("]\r\n");
+
+	buf.Format(_T("IP=0.0.0.0\r\n"));
 	m_msgBuf += buf;
 
 	buf.Format(_T("title=%s\r\n"), m_title.text);
@@ -375,10 +374,6 @@ LPCTSTR CoxConfig::ToIniString()
 	m_msgBuf += buf;
 
 
-	m_msgBuf += _T("[");
-	m_msgBuf += ENTRY_NAME;
-	m_msgBuf += _T("]\r\n");
-
 	buf.Format(_T("alarmSec=%d\r\n"), m_alarmValidSec);
 	m_msgBuf += buf;
 
@@ -394,8 +389,6 @@ LPCTSTR CoxConfig::ToIniString()
 	buf.Format(_T("IS_NORMAL=%d\r\n"), m_is_normal);
 	m_msgBuf += buf;
 
-	buf.Format(_T("TIPPING_POINT=%2.1f\r\n"), m_tipping_point);
-	m_msgBuf += buf;
 
 	buf.Format(_T("SAME_FACE_CONFIDENCE=%2.1f\r\n"), m_same_face_confidence);
 	m_msgBuf += buf;
@@ -421,7 +414,6 @@ void CoxConfig::Copy(CoxConfig* that)
 	m_use_mask_check = that->m_use_mask_check;
 	m_not_use_encrypt = that->m_not_use_encrypt;
 	m_is_normal					= that->m_is_normal;
-	m_tipping_point = that->m_tipping_point;
 	m_wait_time = that->m_wait_time;
 	m_valid_event_limit = that->m_valid_event_limit;
 	m_same_face_confidence = that->m_same_face_confidence;

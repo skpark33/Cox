@@ -215,6 +215,9 @@ copy "$(SolutionDir)01.SDK\01.COXSDK\bin\$(Platform)\$(Configuration)\ThermalCam
 del "$(OutDir)opencv_*420d.dll"
 copy "$(SolutionDir)01.SDK\03.openCV\bin\$(Platform)\$(Configuration)\*" "$(OutDir)"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /y  $(OutDir)$(TargetName)$(TargetExt) $(OutDir)ClientDemoEn.exe</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

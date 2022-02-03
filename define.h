@@ -69,7 +69,7 @@
 #define		MAX_PICTURE					6
 //#define		RGB(r,g,b)          ((COLORREF)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
 
-#define	TIPPING_POINT  37.5f
+#define	ALARM_TEMPERATURE  37.5f
 #define	SAME_FACE_CONFIDENCE  0.9
 
 #define	RES_1920x1080 0
@@ -106,6 +106,7 @@
 #define UBC_CONFIG_PATH	_T("C:\\SQISoft\\UTV1.0\\execute\\data\\")
 #define UBC_EXE_PATH	_T("C:\\SQISoft\\UTV1.0\\execute\\")
 #define ENTRY_NAME		_T("GUARDIAN")
+#define STAT_NAME		_T("GUARDIAN_STAT")
 #define BRW_BIN		_T("UTV_brwClient2.exe")
 
 #define UBC_GUARDIAN_PATH		_T("C:\\SQISoft\\UTV1.0\\Guardian\\")

@@ -56,6 +56,16 @@ CoxGuardian::~CoxGuardian()
 	}
 }
 
+float CoxGuardian::CheckBlackBodyTemp(float blackBodyTemp)
+{
+	float manualCaliTemp = m_stat->m_manualCalibration + 40.0f;
+	if (blackBodyTemp != manualCaliTemp)
+	{
+		return manualCaliTemp;
+	}
+	return 0.0f;
+}
+
 void CoxGuardian::InitFont(CDC* pDc)
 {
 	InitFont(m_titleFont,			pDc, m_config->m_title.font,				m_config->m_title.fontSize);
@@ -223,15 +233,17 @@ void CoxGuardian::PreTranslateMessage(MSG* pMsg)
 }
 void CoxGuardian::Invalidate(ALARM_STATE alarmState)
 {
-	if (alarmState == NO_ALARM)	{
-		m_faceArea->ShowWindow(SW_HIDE);
-	}else{
+	//if (alarmState == NO_ALARM)	{
+		//m_faceArea->ShowWindow(SW_HIDE);
+	//}else{
+	//static bool alreadyStateShow = false;
+
 		m_faceArea->ShowWindow(SW_SHOW);  // showWindow contain Invalidate
 		if (alarmState == m_alarmState) {
 			m_faceArea->Invalidate();
 			return;
 		}
-	}
+	//}
 	m_parent->Invalidate();
 
 }
@@ -269,6 +281,14 @@ void CoxGuardian::OnPaint()
 	}
 	//DrawFaces(&dcMem);
 	TraceLog((_T("DrawFaces end")));
+
+	if (!m_stat->IsUsed())//&& !alreadyStateShow ) 
+	{
+		CString msg;
+		msg.Format(_T("Fever Alarm Threshold : %2.1f"), m_stat->m_alarmTemperature);
+		m_statPlate->SetWindowText(msg);
+		//alreadyStateShow = true;
+	}
 	
 	//깜박임 방지 코드 start
 	pDC->BitBlt(rect.left, rect.top, rect.Width(), rect.Height(), &dcMem, 0, 0, SRCCOPY);
@@ -442,10 +462,16 @@ bool CoxGuardian::WriteNormal(CDC& dc, int x, int y)
 	posy += m_config->m_title.fontSize + 36;
 	WriteSingleLine(m_config->m_subTitle.text, &dc, m_subTitleFont, m_config->m_subTitle.fgColor, posy, SUBTITLE_HEIGHT);
 	posy = TITLE_AREA_HEIGHT + m_cameraHeight + NOTICE_AREA_HEIGHT/2 + 5;
-	WriteSingleLine(m_config->m_noticeTitle.text, &dc, m_noticeTitleFont, m_config->m_noticeTitle.fgColor, posy, NOTICE_TITLE_HEIGHT);
-
+	//WriteSingleLine(m_config->m_noticeTitle.text, &dc, m_noticeTitleFont, m_config->m_noticeTitle.fgColor, posy, NOTICE_TITLE_HEIGHT);
+	DrawNotice(dc, posy);
 	return true;
 }
+
+void CoxGuardian::DrawNotice(CDC& dc, int posy)
+{
+	WriteSingleLine(m_config->m_noticeTitle.text, &dc, m_noticeTitleFont, m_config->m_noticeTitle.fgColor, posy, NOTICE_TITLE_HEIGHT);
+}
+
 
 bool CoxGuardian::WriteFever(CDC& dc, int x, int y)
 {
@@ -544,7 +570,7 @@ bool CoxGuardian::CheckFever(FACE_INFO* faceInfo)
 	if (m_stat->IsUsed() && m_stat->IsValid()) {
 		return (faceInfo->face_temp >= m_stat->m_threshold + m_stat->m_avg);
 	}
-	return (faceInfo->face_temp >= m_config->m_tipping_point);
+	return (faceInfo->face_temp >= m_stat->m_alarmTemperature);
 }
 
 time_t CoxGuardian::CaseDetected(FACE_INFO* faceInfo, CRect& faceRect, uint32_t dataSize, BYTE* faceImage)
@@ -557,7 +583,7 @@ time_t CoxGuardian::CaseDetected(FACE_INFO* faceInfo, CRect& faceRect, uint32_t 
 	Detected* detected = new Detected();
 	detected->key = timeKey;
 	detected->temperature = faceInfo->face_temp;
-	detected->isFever = CheckFever(faceInfo);//(faceInfo->face_temp >= m_config->m_tipping_point);
+	detected->isFever = CheckFever(faceInfo);//(faceInfo->face_temp >= m_stat->m_threshold);
 	detected->isNoMask = (faceInfo->mask_state == MASK_NOT_WEARING);
 	detected->detectTime = now;
 	detected->faceFeature.Copy(faceInfo->facefeature);
@@ -966,8 +992,8 @@ HBRUSH CoxGuardian::OnCtlColor(int statisticsPlateId, CDC* pDC, CWnd* pWnd, UINT
 	//if (pWnd->GetDlgCtrlID() == IDC_STATIC_STAT)  //stat plate
 	if (pWnd->GetDlgCtrlID() == statisticsPlateId)  //stat plate
 	{
-		if (m_stat->IsUsed() && m_stat->IsValid())
-		{
+		//if (m_stat->IsUsed() && m_stat->IsValid())
+		//{
 			pDC->SetBkColor(NORMAL_BG_COLOR);
 			pDC->SetTextColor(NORMAL_FG_COLOR_2);
 			pDC->SetBkMode(TRANSPARENT);
@@ -978,7 +1004,7 @@ HBRUSH CoxGuardian::OnCtlColor(int statisticsPlateId, CDC* pDC, CWnd* pWnd, UINT
 			}
 			CFont* oldFont = pDC->SelectObject(statFont);
 			return (HBRUSH)m_statBrush;
-		}
+		//}
 	}
 	return hbr;
 }
@@ -1010,17 +1036,13 @@ void CoxGuardian::AddSample(float temper)
 void CoxGuardian::InitStat()
 {
 	m_statBrush.CreateSolidBrush(NORMAL_BG_COLOR); // 평균값 배경 색 변경
-	//CWnd* statPlate = GetDlgItem(IDC_STATIC_STAT);
 	if (m_stat->IsUsed() && m_stat->IsValid()) {
-		CString msg = m_stat->ToString(m_localeLang);
-		m_statPlate->SetWindowText(msg);
+		//CWnd* statPlate = GetDlgItem(IDC_STATIC_STAT);
 		m_statPlate->MoveWindow(0, WIN_HEIGHT - 42, WIN_WIDTH, 42);
 		m_statPlate->ShowWindow(SW_SHOW);
-		m_statPlate->SetForegroundWindow();
-	}
-	else
-	{
-		m_statPlate->ShowWindow(SW_HIDE);
+		m_statPlate->SetForegroundWindow();		
+		CString msg = m_stat->ToString(m_localeLang);
+		m_statPlate->SetWindowText(msg);
 	}
 }
  

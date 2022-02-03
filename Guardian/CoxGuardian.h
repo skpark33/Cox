@@ -73,6 +73,8 @@ public:
 	CoxGuardian(CCOXFDSampleDlg* pWnd, CVCamView*	vcam, CTCamView*	 tcam, CWnd* statPlate, CFacePainterStatic* faceArea);
 	virtual ~CoxGuardian();
 
+	float CheckBlackBodyTemp(float blackBodyTemp);
+
 	void InitFont(CDC* pDc);
 	void InitFont(CFont& targetFont, CDC* pDc, LPCTSTR fontName, int fontSize, float fontWidth = 1);
 
@@ -97,6 +99,8 @@ public:
 	bool WriteNormal(CDC& dc, int x, int y);
 	bool WriteFever(CDC& dc, int x, int y);
 	bool WriteNoMask(CDC& dc, int x, int y);
+	void DrawNotice(CDC& dc, int posy);
+
 	
 	void WriteSingleLine(LPCTSTR text,
 		CDC* pDc,

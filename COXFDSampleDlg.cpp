@@ -131,11 +131,29 @@ void CCOXFDSampleDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	if (m_cox_guardian)
 	{
+		static int count = 0;
 		m_cox_guardian->OnTimer(nIDEvent);  //skpark in your arer
+		if (count == 5)
+		{
+			CheckBlackBodyTemp();
+		}
+		count++;
 		//m_guardian->OnTimer(nIDEvent);
 	}
 	CDialog::OnTimer(nIDEvent);
 }
+
+void CCOXFDSampleDlg::CheckBlackBodyTemp() {
+	float blackBodyTemp = m_cox_guardian->CheckBlackBodyTemp(theINIMan().GetBlackbodyTemp());
+	if (blackBodyTemp != 0.0f){
+		TraceLog((_T("blackbody temp manually configured !!!!")));
+		theINIMan().ChangeBlackBodyTemp(blackBodyTemp);
+		TraceLog((_T("Program should restart !!!!")));
+		Sleep(1000);
+		::SendMessage(GetSafeHwnd(), WM_CLOSE, NULL, NULL);
+	}
+}
+
 
 BOOL CCOXFDSampleDlg::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 {

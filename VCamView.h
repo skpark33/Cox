@@ -101,6 +101,7 @@ public:
 //skpark in your area
 public:
 	void SetCallback(CoxGuardian* g);
+	CString  GetTimeStr();
 	CoxGuardian	*	m_cox_guardian;
 //skpark in your area end
 };
