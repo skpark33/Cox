@@ -9,11 +9,8 @@
 #include "ci/libAes256/ciElCryptoAes256.h"
 #include "FacePainterStatic.h"
 
-CoxGuardian::CoxGuardian(CCOXFDSampleDlg* pWnd, CVCamView*	vcam, CTCamView*	 tcam, CWnd* statPlate, 
-	CFacePainterStatic* faceArea)
+CoxGuardian::CoxGuardian(CCOXFDSampleDlg* pWnd,  CWnd* statPlate, 	CFacePainterStatic* faceArea)
 : m_parent(pWnd) // 	should be ReleaseDC(pDC);
-, m_wndVCam(vcam)
-, m_wndTCam(tcam)
 , m_statPlate(statPlate)
 , m_bFullScreen(true)
 , m_currentCtrlKey(NORMAL_PAGE)
@@ -111,16 +108,16 @@ void CoxGuardian::MaxWindow()
 	CRect rc;
 	m_parent->GetClientRect(&rc);
 		
-	if (m_wndTCam->GetSafeHwnd()) {
-		m_wndTCam->SetWindowPos(NULL,
+	if (m_parent->GetTCam()->GetSafeHwnd()) {
+		m_parent->GetTCam()->SetWindowPos(NULL,
 			rc.left,
 			rc.top + TITLE_AREA_HEIGHT,
 			WIN_WIDTH,
 			m_cameraHeight,
 			m_config->m_is_normal ? SWP_HIDEWINDOW : SWP_SHOWWINDOW);  //skpark  <-- SWP_SHOWWINDOW); 
 	}
-	if (m_wndVCam->GetSafeHwnd()) {
-		m_wndVCam->SetWindowPos(NULL,
+	if (m_parent->GetVCam()->GetSafeHwnd()) {
+		m_parent->GetVCam()->SetWindowPos(NULL,
 			rc.left,
 			rc.top + TITLE_AREA_HEIGHT,
 			WIN_WIDTH,
@@ -137,13 +134,13 @@ void CoxGuardian::MinWindow()
 	//m_parent->ShowWindow(SW_MAXIMIZE);
 	//m_parent->MoveWindow(0, 0, static_cast<int>(STREAM_WIDTH), static_cast<int>(STREAM_HEIGHT), TRUE);
 
-	if (m_wndTCam->GetSafeHwnd()) {
-		m_wndTCam->SetWindowPos(NULL,
+	if (m_parent->GetTCam()->GetSafeHwnd()) {
+		m_parent->GetTCam()->SetWindowPos(NULL,
 			0, 0,STREAM_WIDTH,STREAM_HEIGHT,
 			m_config->m_is_normal ? SWP_HIDEWINDOW : SWP_SHOWWINDOW);  //skpark  <-- SWP_SHOWWINDOW); 
 	}
-	if (m_wndVCam->GetSafeHwnd()) {
-		m_wndVCam->SetWindowPos(NULL,
+	if (m_parent->GetVCam()->GetSafeHwnd()) {
+		m_parent->GetVCam()->SetWindowPos(NULL,
 			0, 0, STREAM_WIDTH, STREAM_HEIGHT, 
 			m_config->m_is_normal ? SWP_SHOWWINDOW : SWP_HIDEWINDOW);
 	}
@@ -176,8 +173,8 @@ bool CoxGuardian::ToggleCamera()
 
 	TraceLog((_T("skpark VK_F5...")));
 
-	m_wndTCam->ShowWindow(m_config->m_is_normal ? SW_HIDE : SW_SHOW);
-	m_wndVCam->ShowWindow(m_config->m_is_normal ? SW_SHOW : SW_HIDE);
+	m_parent->GetTCam()->ShowWindow(m_config->m_is_normal ? SW_HIDE : SW_SHOW);
+	m_parent->GetVCam()->ShowWindow(m_config->m_is_normal ? SW_SHOW : SW_HIDE);
 
 	CString iniPath = UBC_CONFIG_PATH;
 	iniPath += UBCBRW_INI;
@@ -670,7 +667,7 @@ BOOL CoxGuardian::IsFaceBoxInTheramlArea(FACE_INFO*	a_pFaceInfo, CTCamView*		a_p
 CRect CoxGuardian::DrawValidAreaBox(CRect& rect, ID2D1BitmapRenderTarget*	a_pBitmapTarget,
 													ID2D1SolidColorBrush*	a_pBrush )
 {
-	//CRect pTCamViewRect(m_wndTCam->GetZoomRect());
+	//CRect pTCamViewRect(m_parent->GetTCam()->GetZoomRect());
 	int offsetW = (WIN_WIDTH / 20);
 	int offsetH = (m_cameraHeight / 20);
 
@@ -749,8 +746,8 @@ CImage* CoxGuardian::CropGdiImage(BYTE * buffer, DWORD size, CRect& cropArea, LP
 {
 	
 	// buffer 에는 mat 타입으로 값이 온다.
-	cv::Mat  aMat(m_wndVCam->m_nHeight,
-		m_wndVCam->m_nWidth,
+	cv::Mat  aMat(m_parent->GetVCam()->m_nHeight,
+		m_parent->GetVCam()->m_nWidth,
 		CV_8UC4,
 		buffer);
 

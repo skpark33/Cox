@@ -70,7 +70,7 @@ typedef  std::list<Detected*>		DETECTED_LIST;
 class  CoxGuardian
 {
 public:
-	CoxGuardian(CCOXFDSampleDlg* pWnd, CVCamView*	vcam, CTCamView*	 tcam, CWnd* statPlate, CFacePainterStatic* faceArea);
+	CoxGuardian(CCOXFDSampleDlg* pWnd, CWnd* statPlate, CFacePainterStatic* faceArea);
 	virtual ~CoxGuardian();
 
 	float CheckBlackBodyTemp(float blackBodyTemp);
@@ -162,9 +162,6 @@ public:
 	CWnd* m_statPlate;
 	
 	CBrush		m_statBrush;
-
-	CVCamView*		m_wndVCam;
-	CTCamView*			m_wndTCam;
 
 	CoxConfig*		m_config;
 	CStatistics*		m_stat;

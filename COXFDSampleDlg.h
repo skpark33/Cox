@@ -141,6 +141,10 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg LRESULT OnOldFileDelete(WPARAM, LPARAM);
 	void CheckBlackBodyTemp();
+
+	CVCamView*	GetVCam() { return &m_wndVCam; }
+	CTCamView*		GetTCam() { return	&m_wndTCam; }
+
 public:
 	bool m_isMinimize;
 	CoxGuardian* m_cox_guardian;

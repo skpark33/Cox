@@ -241,7 +241,7 @@ BOOL CCOXFDSampleDlg::OnInitDialog()
 	// OnInitDialog start
 	// 
 	//skpark in your area
-	m_cox_guardian = new CoxGuardian(this, &m_wndVCam, &m_wndTCam, &m_statArea, &m_stFaceArea);  //skpark in your area
+	m_cox_guardian = new CoxGuardian(this, &m_statArea, &m_stFaceArea);  //skpark in your area
 	//m_guardian = new CGuardian(this, &m_wndVCam, &m_wndTCam, GetDlgItem(IDC_STATIC_STAT)); //skpark in your area
 	m_wndVCam.SetCallback(m_cox_guardian);
 	theTCMan().SetConfig(m_cox_guardian->m_config);
